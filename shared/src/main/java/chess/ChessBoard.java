@@ -34,7 +34,12 @@ public class ChessBoard {
      * position
      */
     public ChessPiece getPiece(ChessPosition position) {
-        return board[position.getRow()-1][position.getColumn()-1];
+        int newRow = position.getRow() - 1;
+        int newCol = position.getColumn() - 1;
+        if (newRow >= 1 && newRow <= 8 && newCol >= 1 && newCol <= 8) {
+            return board[newRow][newCol];
+        }
+        return null;
     }
 
     /**
@@ -69,12 +74,11 @@ public class ChessBoard {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        ChessBoard that = (ChessBoard) o;
-        return Objects.deepEquals(board, that.board);
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        ChessBoard that = (ChessBoard) obj;
+        return Arrays.deepEquals(board, that.board);
     }
 
     @Override
