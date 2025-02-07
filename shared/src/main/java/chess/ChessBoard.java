@@ -33,15 +33,15 @@ public class ChessBoard {
      * @return Either the piece at the position, or null if no piece is at that
      * position
      */
+
     public ChessPiece getPiece(ChessPosition position) {
         int newRow = position.getRow() - 1;
         int newCol = position.getColumn() - 1;
-        if (newRow >= 1 && newRow <= 8 && newCol >= 1 && newCol <= 8) {
-            return board[newRow][newCol];
+        if (newRow < 0 || newRow >= 8 || newCol < 0 || newCol >= 8) {
+            return null;
         }
-        return null;
+        return board[newRow][newCol];
     }
-
     /**
      * Sets the board to the default starting board
      * (How the game of chess normally starts)

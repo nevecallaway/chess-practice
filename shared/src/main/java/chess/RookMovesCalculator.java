@@ -7,6 +7,9 @@ public class RookMovesCalculator implements ChessMovesCalculator {
     @Override
     public Collection<ChessMove> calculateMoves(ChessBoard board, ChessPosition position) {
         Collection<ChessMove> validMoves = new ArrayList<>();
+        ChessPiece piece = board.getPiece(position);
+        if (piece == null) return validMoves;
+
         int[] rowMoves = {-1, 0, 1, 0};
         int[] colMoves = {0, 1, 0, -1};
         for (int i = 0; i < 4; i++) {
@@ -24,7 +27,7 @@ public class RookMovesCalculator implements ChessMovesCalculator {
                 if (pieceAtNewPosition == null) {
                     validMoves.add(new ChessMove(position, newPosition, null));
                 }
-                else if (pieceAtNewPosition.getTeamColor() != board.getPiece(position).getTeamColor()) {
+                else if (pieceAtNewPosition.getTeamColor() != piece.getTeamColor()) {
                     validMoves.add(new ChessMove(position, newPosition, null));
                     break;
                 }
@@ -36,6 +39,6 @@ public class RookMovesCalculator implements ChessMovesCalculator {
         return validMoves;
     }
     private boolean onBoard(int row, int col) {
-        return row >= 1 && row < 9 && col >= 1 && col < 9;
+        return row >= 1 && row <= 8 && col >= 1 && col <= 8;
     }
 }
